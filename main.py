@@ -12,7 +12,7 @@ with open('roster1.csv') as old_roster:
     for row in reader:
         roster1_data.update({row['Name'] : row['Days']})
 
-print(roster1_data)
+#print(roster1_data)
 
 with open('roster2.csv') as new_roster:
     reader = csv.DictReader(new_roster)
@@ -33,17 +33,15 @@ def find_terminations(roster1,roster2):
 
 
 def find_day_changes(roster1,roster2):
-    differences = roster2.items() - roster1.items()
-    #print(differences)
-    for item in differences:
-        print(item)
-
-    
-    
-
-
-
-
+    same_keys = roster1.keys() & roster2.keys()
+    #print(same_keys)
+    for name in same_keys:
+        #print(roster1.get(name))
+        #print(roster2.get(name))
+        if roster1.get(name) != roster2.get(name):
+            #print(name)
+            #print(roster2.get(name))
+            day_changes.update({name : roster2.get(name) })
 
 
 find_additions(roster1_data,roster2_data)
@@ -51,6 +49,7 @@ find_additions(roster1_data,roster2_data)
 find_terminations(roster1_data,roster2_data)
 #print("Terminated: ", Terminations)
 find_day_changes(roster1_data,roster2_data)
+print(day_changes)
 
 
 
