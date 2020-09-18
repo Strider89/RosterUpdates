@@ -1,38 +1,30 @@
 import csv
 
-roster1_data = {}
-roster2_data = {}
-
-additions = []
-terminations = []
-day_changes = {}
-
-with open('roster1.csv') as old_roster:
-    reader = csv.DictReader(old_roster)
-    for row in reader:
-        roster1_data.update({row['Name'] : row['Days']})
-
-#print(roster1_data)
-
-with open('roster2.csv') as new_roster:
-    reader = csv.DictReader(new_roster)
-    for row in reader:
-        roster2_data.update({row['Name'] : row['Days']})
-
-#print(roster2_data)
+def create_dicts(csv_file):
+    roster_data = {}
+    with open(csv_file) as new_roster:
+        reader = csv.DictReader(new_roster)
+        for row in reader:
+            roster_data.update({row['Name'] : row['Days']})
+    return roster_data
 
 def find_additions(roster1,roster2):
+    additions = []
     for person in roster2:
         if person not in roster1:
             additions.append(person)
+    return additions
 
 def find_terminations(roster1,roster2):
+    terminations = []
     for person in roster1:
         if person not in roster2:
             terminations.append(person)
+    return terminations
 
 
 def find_day_changes(roster1,roster2):
+    day_changes = {}
     same_keys = roster1.keys() & roster2.keys()
     #print(same_keys)
     for name in same_keys:
@@ -42,14 +34,20 @@ def find_day_changes(roster1,roster2):
             #print(name)
             #print(roster2.get(name))
             day_changes.update({name : roster2.get(name) })
+    return day_changes
 
+roster1 = create_dicts('roster1.csv')
+roster2 = create_dicts('Roster2.csv')
 
-find_additions(roster1_data,roster2_data)
-#print("Added: ", Additions)
-find_terminations(roster1_data,roster2_data)
-#print("Terminated: ", Terminations)
-find_day_changes(roster1_data,roster2_data)
+additions = find_additions(roster1,roster2)
+print(additions)
+terminations = find_terminations(roster1,roster2)
+print(terminations)
+day_changes = find_day_changes(roster1,roster2)
 print(day_changes)
+
+
+
 
 
 
