@@ -1,5 +1,6 @@
 import csv
 
+
 def create_dicts(csv_file):
     roster_data = {}
     with open(csv_file) as new_roster:
@@ -40,11 +41,13 @@ roster1 = create_dicts('roster1.csv')
 roster2 = create_dicts('Roster2.csv')
 
 additions = find_additions(roster1,roster2)
-print(additions)
+#print(additions)
 terminations = find_terminations(roster1,roster2)
-print(terminations)
+#print(terminations)
 day_changes = find_day_changes(roster1,roster2)
 print(day_changes)
+
+
 
 
 
