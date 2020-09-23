@@ -23,6 +23,13 @@ def find_terminations(roster1,roster2):
             terminations.append(person)
     return terminations
 
+#change order of roster parameters for additions and terminations
+def find_changes(roster1,roster2):
+    changes = []
+    for person in roster1:
+        if person not in roster2:
+            changes.append(person)
+    return changes
 
 def find_day_changes(roster1,roster2):
     day_changes = {}
@@ -40,12 +47,12 @@ def find_day_changes(roster1,roster2):
 roster1 = create_dicts('roster1.csv')
 roster2 = create_dicts('Roster2.csv')
 
-additions = find_additions(roster1,roster2)
-#print(additions)
-terminations = find_terminations(roster1,roster2)
-#print(terminations)
+additions = find_changes(roster1,roster2)
+print(additions)
+terminations = find_changes(roster2,roster1)
+print(terminations)
 day_changes = find_day_changes(roster1,roster2)
-print(day_changes)
+#print(day_changes)
 
 
 
