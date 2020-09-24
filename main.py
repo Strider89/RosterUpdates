@@ -45,6 +45,28 @@ def create_report_terminal(additions,terminations,day_changes):
             print(str(key) + " days changed to Monday, Tuesday, Wednesday, Thursday")
         else:
             print(str(key) + " days changed to Monday, Tuesday, Wednesday, Thursday, Friday")
+
+def create_file_report(additions, terminations, day_changes):
+    with open('Roster_Report.txt', 'w') as report:
+        for person in additions:
+            report.write(str(person) + " is new to the roster \n")
+        for person in terminations:
+            report.write(str(person) + " is terminated from the roster \n")
+        for key in day_changes:
+            if day_changes.get(key) == 'M':
+                report.write(str(key) + " days changed to Monday \n")
+            elif day_changes.get(key) == 'MT':
+                report.write(str(key) + " days changed to Monday, Tuesday \n")
+            elif day_changes.get(key) == 'MTW':
+                report.write(str(key) + " days changed to Monday, Tuesday, Wednesday \n")
+            elif day_changes.get(key) == 'MTWThu':
+                report.write(str(key) + " days changed to Monday, Tuesday, Wednesday, Thursday \n")
+            else:
+                report.write(str(key) + " days changed to Monday, Tuesday, Wednesday, Thursday, Friday \n")
+
+
+
+
         
 
 roster1 = create_dicts('roster1.csv')
@@ -58,6 +80,8 @@ day_changes = find_day_changes(roster1,roster2)
 #print("Day Changes", day_changes)
 
 create_report_terminal(additions,terminations,day_changes)
+
+create_file_report(additions,terminations,day_changes)
 
 
 
